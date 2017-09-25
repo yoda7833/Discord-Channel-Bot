@@ -1,0 +1,23 @@
+apply plugin: 'java'
+dependencies {
+compile 'net.dv8tion:JDA:3.2.0_235'
+}
+repositories {
+jcenter()
+}
+task fatJar(type: Jar) {
+manifest {
+attributes 'Main-Class': 'your.main.class.goes.Here'
+}
+from {
+configurations.compile.collect {
+dependency ->
+if (dependency.directory) {
+return dependency
+} else {
+return zipTree(dependency)
+}
+}
+}
+with jar
+}
