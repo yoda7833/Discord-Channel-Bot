@@ -1,13 +1,13 @@
 apply plugin: 'java'
 dependencies {
-compile 'net.dv8tion:JDA:3.2.0_235'
+compile 'net.dv8tion:JDA:3.3.1_280'
 }
 repositories {
 jcenter()
 }
 task fatJar(type: Jar) {
 manifest {
-attributes 'Main-Class': 'your.main.class.goes.Here'
+attributes 'Main-Class': 'Main.java'
 }
 from {
 configurations.compile.collect {

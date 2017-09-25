@@ -7,7 +7,7 @@ import net.dv8tion.jda.core.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.core.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.core.hooks.EventListener;
 
-public class EventManager implements EventListener {
+/*public class EventManager implements EventListener {
 	private boolean[] channelsTemp = null;
 	
 	@Override
@@ -113,4 +113,4 @@ public class EventManager implements EventListener {
 			}
 		}
 	}
-}
+}*/

@@ -7,7 +7,7 @@ import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
-//import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.JDABuilder;
 
 public class Main {
 	private static JDA jda;
@@ -21,14 +21,15 @@ public class Main {
 		String BlakeBot = "MzM4OTQyNzk2NTIwMDk1NzQ0.DFcwng.Ep83M3dNW-8BqsW6140KwbsBeNA";
 		
 		try {
-			jda = new JDABuilder(AccountType.BOT).addEventListener(new EventManager()).addEventListener(new MessageListener()).setToken(testBot).buildBlocking();
+			jda = new JDABuilder(AccountType.BOT).setToken(testBot).buildBlocking();
+			//jda = new JDABuilder(AccountType.BOT).addEventListener(new EventManager()).addEventListener(new MessageListener()).setToken(testBot).buildBlocking();
 			jda.setAutoReconnect(true);
-			Guild hivemind =jda.getGuilds().get(1);
+			/*Guild hivemind =jda.getGuilds().get(1);
 			jda.getPresence().setGame(Game.of("!help"));
 			channels  = hivemind.getVoiceChannels();
 			base.add(hivemind.getVoiceChannelsByName("lobby", true).get(0));
 			base.add(hivemind.getVoiceChannelsByName("afk", true).get(0));
-			base.add(hivemind.getVoiceChannelsByName("mods", true).get(0));
+			base.add(hivemind.getVoiceChannelsByName("mods", true).get(0));*/
 			
 		} catch (LoginException e) {
 			// TODO Auto-generated catch block

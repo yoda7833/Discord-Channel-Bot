@@ -2,7 +2,7 @@ import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.guild.voice.*;
 
-public class ChannelMain {
+/*public class ChannelMain {
 	private VoiceChannel channel;
 	private VoiceChannel[] temps = new VoiceChannel[10];
 	public ChannelMain(VoiceChannel mychannel)
@@ -43,4 +43,4 @@ public class ChannelMain {
 		}
 	}
 	
-}
+}*/
