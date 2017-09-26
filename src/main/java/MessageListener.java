@@ -8,15 +8,15 @@ import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
-/*public class MessageListener extends ListenerAdapter
+public class MessageListener extends ListenerAdapter
 {
     @Override
     public void onMessageReceived(MessageReceivedEvent event)
     {
+    	Message message = event.getMessage();
+        String content = message.getRawContent(); 
         if (event.getAuthor().isBot()) return;
         // We don't want to respond to other bot accounts, including ourself
-        Message message = event.getMessage();
-        String content = message.getRawContent(); 
         // getRawContent() is an atomic getter
         // getContent() is a lazy getter which modifies the content for e.g. console view (strip discord formatting)
         if (content.equals("!ping"))
@@ -108,4 +108,4 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
         }
     }
     
-}*/
+}

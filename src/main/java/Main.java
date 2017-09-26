@@ -11,8 +11,7 @@ import net.dv8tion.jda.core.JDABuilder;
 
 public class Main {
 	private static JDA jda;
-	public static List<VoiceChannel> channels; 
-	public static ArrayList<VoiceChannel> base;
+	public static ArrayList<Long> base = new ArrayList<Long>();
 	public static void main(String[] args) {
 		String gender = "Female"; //the bot is a she and you should respect that
 		//test-bot token: MzM4NTg1MDc3Mzk3MTkyNzA0.DFXjgQ.i5jyKTdpTeQ6AS8ssDuVCr3gqxE
@@ -21,16 +20,14 @@ public class Main {
 		String BlakeBot = "MzM4OTQyNzk2NTIwMDk1NzQ0.DFcwng.Ep83M3dNW-8BqsW6140KwbsBeNA";
 		
 		try {
-			jda = new JDABuilder(AccountType.BOT).setToken(testBot).buildBlocking();
-			//jda = new JDABuilder(AccountType.BOT).addEventListener(new EventManager()).addEventListener(new MessageListener()).setToken(testBot).buildBlocking();
+			//jda = new JDABuilder(AccountType.BOT).setToken(testBot).buildBlocking();
+			jda = new JDABuilder(AccountType.BOT).addEventListener(new EventManager()).addEventListener(new MessageListener()).setToken(testBot).buildBlocking();
 			jda.setAutoReconnect(true);
-			/*Guild hivemind =jda.getGuilds().get(1);
+			Guild hivemind =jda.getGuildById("329171118063747072");
 			jda.getPresence().setGame(Game.of("!help"));
-			channels  = hivemind.getVoiceChannels();
-			base.add(hivemind.getVoiceChannelsByName("lobby", true).get(0));
-			base.add(hivemind.getVoiceChannelsByName("afk", true).get(0));
-			base.add(hivemind.getVoiceChannelsByName("mods", true).get(0));*/
-			
+			base.add(329176499871809537L);//Lobby
+			base.add(329178290562531328l);//afk
+			base.add(329178290583764992l);//mods
 		} catch (LoginException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
