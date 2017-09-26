@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.dv8tion.jda.core.entities.Guild;
@@ -10,6 +11,7 @@ import net.dv8tion.jda.core.events.guild.voice.GuildVoiceMoveEvent;
 import net.dv8tion.jda.core.hooks.EventListener;
 
 public class EventManager implements EventListener {
+	private ArrayList<ChannelList> lists = new ArrayList<>();
 	public EventManager(Guild myGuild)
 	{
 		super();
