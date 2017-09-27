@@ -52,6 +52,4 @@ public class ChannelList {
 		}
 		return false;
 	}
-	
-
 }
