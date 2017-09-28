@@ -39,7 +39,7 @@ public class MessageListener extends ListenerAdapter
 	        	{
 	        		for(User x : message.getMentionedUsers())
 	        		{
-	        			event.getGuild().getController().moveVoiceMember(event.getGuild().getMember(x), event.getGuild().getAfkChannel()).queue();;
+	        			event.getGuild().getController().moveVoiceMember(event.getGuild().getMember(x), event.getGuild().getAfkChannel()).complete();;
 	        		}
 	        	}
         	}
