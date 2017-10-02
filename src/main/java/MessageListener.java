@@ -31,6 +31,7 @@ public class MessageListener extends ListenerAdapter
         }
         else if(content.startsWith("!afk "))
         {
+        	if(message.getAuthor().getIdLong()==139171653480349697L)
         	if(message.getMember().hasPermission(Permission.ADMINISTRATOR))
         	{
 	        	if(message.getMentionedUsers().isEmpty())

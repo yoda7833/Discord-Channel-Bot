@@ -27,8 +27,9 @@ public class Main {
 			jda.addEventListener(new EventManager(hivemind));
 			jda.getPresence().setGame(Game.of("!help"));
 			base.add(329176499871809537L);//Lobby
-			base.add(329178290562531328l);//afk
-			base.add(329178290583764992l);//mods
+			base.add(329178290562531328L);//afk
+			base.add(329178290583764992L);//mods
+			base.add(329176670588370954L);//Ulol practice
 		} catch (LoginException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

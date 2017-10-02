@@ -12,9 +12,17 @@ public class ChannelList {
 	{
 		return first.getChannel();
 	}
+	public ChannelNode getFirstNode()
+	{
+		return first;
+	}
 	public VoiceChannel getLast()
 	{
 		return first.getPrevious().getChannel();
+	}
+	public ChannelNode getLastNode()
+	{
+		return first.getPrevious();
 	}
 	public boolean contains(VoiceChannel search)
 	{
