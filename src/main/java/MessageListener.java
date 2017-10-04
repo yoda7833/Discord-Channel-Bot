@@ -27,7 +27,7 @@ public class MessageListener extends ListenerAdapter
         else if(content.equals("!pong"))
         {
         	MessageChannel channel = event.getChannel();
-            channel.sendMessage("Ping").queue();
+            channel.sendMessage("Ping "+event.getJDA().getPing()+"ms").queue();
         }
         else if(content.startsWith("!afk "))
         {
@@ -59,15 +59,6 @@ public class MessageListener extends ListenerAdapter
         	{
         		MessageChannel channel = event.getChannel();
         		channel.sendMessage("Shutting down....").queue();
-        		List<VoiceChannel> channels = event.getGuild().getVoiceChannels();
-        		for(VoiceChannel x : channels)
-        		{
-        			if(!Main.base.contains(x))
-        			{
-        				//System.out.println("Here");
-        				x.delete().queue();
-        			}
-        		}
         		System.out.println("Stopped by command");
         		event.getJDA().shutdown();
         	}
@@ -92,7 +83,7 @@ public class MessageListener extends ListenerAdapter
         		new Main();
         	}
         }
-        else if(content.startsWith("!noTemp"))
+        /*else if(content.startsWith("!noTemp"))
         {
         	if(message.getMember().hasPermission(Permission.ADMINISTRATOR))
         	{
@@ -106,7 +97,7 @@ public class MessageListener extends ListenerAdapter
         	else
         		event.getChannel().sendMessage("You don't have permission to do that").queue();
         	
-        }
+        }*/
     }
     
 }

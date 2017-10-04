@@ -42,7 +42,7 @@ public class ChannelList {
 		if(first.getNext()==first)
 		{
 			ChannelNode temp = new ChannelNode(set, first, first);
-			temp.getChannel().getGuild().getController().modifyVoiceChannelPositions().moveTo(first.getChannel().getPosition()-1);
+			set.getGuild().getController().modifyVoiceChannelPositions().moveTo(first.getChannel().getPositionRaw());//out of bounds error here
 			first.getChannel().getManager().setName(first.getChannel().getName()+" 1").queue();
 			first.setPrevious(temp);
 			first.setNext(temp);
@@ -51,7 +51,7 @@ public class ChannelList {
 		else
 		{
 			ChannelNode temp = new ChannelNode(set, first,first.getPrevious());
-			temp.getChannel().getGuild().getController().modifyVoiceChannelPositions().moveTo(first.getChannel().getPosition()-1);
+			set.getGuild().getController().modifyVoiceChannelPositions().moveTo(first.getChannel().getPosition()-1);
 			first.getChannel().getManager().setName(first.getChannel().getName()+" 1").queue();
 			ChannelNode current = first.getNext();
 			int nameNumber =2;
@@ -102,5 +102,13 @@ public class ChannelList {
 		{
 			first.getChannel().getManager().setName(first.getChannel().getName().substring(first.getChannel().getName().length()-2)+nameNumber).queue();
 		}
+	}
+	public void clear()
+	{
+		/*ChannelNode current = first;
+		while(!current.getChannel().equals(first.getChannel()))
+		{
+			remove(current.getChannel());
+		}*/
 	}
 }

@@ -23,7 +23,9 @@ public class Main {
 			//jda = new JDABuilder(AccountType.BOT).setToken(testBot).buildBlocking();
 			jda = new JDABuilder(AccountType.BOT).addEventListener(new MessageListener()).setToken(testBot).buildBlocking();
 			jda.setAutoReconnect(true);
-			Guild hivemind =jda.getGuildById("329171118063747072");
+			//test Grounds id: 338602402557067264L
+			//hivemind     id: 329171118063747072L
+			Guild hivemind =jda.getGuildById(338602402557067264L);
 			jda.addEventListener(new EventManager(hivemind));
 			jda.getPresence().setGame(Game.of("!help"));
 			base.add(329176499871809537L);//Lobby

@@ -19,22 +19,24 @@ public class EventManager implements EventListener {
 	}
 	
 	@Override
-	public void onEvent(Event event) {
+	public void onEvent(Event event) {//does not have a empty channel, and channel they joined has more than 1
 		if(event instanceof GuildVoiceJoinEvent)
 		{
 				for(ChannelList x: lists)
 				{
 					ChannelNode current = x.getFirstNode();
 					boolean notEmpty = true;
-					while(current!=x.getFirstNode())
+					do
 					{
 						if(current.getChannel().getMembers().size()==0)
 							notEmpty = false;
-					}
+						current = current.getNext();
+					}while(current!=x.getFirstNode());
 					if(notEmpty)
 						if(x.contains(((GuildVoiceJoinEvent) event).getChannelJoined()))
 						{
 							x.getFirst().createCopy().complete();
+							//System.out.println(((GuildVoiceJoinEvent) event).getGuild().getVoiceChannels().get(((GuildVoiceJoinEvent) event).getGuild().getVoiceChannels().size()-1).getName());
 							x.add(((GuildVoiceJoinEvent) event).getGuild().getVoiceChannels().get(((GuildVoiceJoinEvent) event).getGuild().getVoiceChannels().size()-1));
 						}
 				}
@@ -61,6 +63,12 @@ public class EventManager implements EventListener {
 							x.remove(((GuildVoiceLeaveEvent) event).getChannelLeft());
 				}	
 		}
+	}
+	
+	public void clearAll()
+	{
+		for(ChannelList x: lists)
+			x.clear();
 	}
 	
 	public void createLinkedChannels(Guild myGuild)
