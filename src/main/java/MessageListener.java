@@ -4,6 +4,7 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.requests.RestAction;
 
@@ -58,8 +59,8 @@ public class MessageListener extends net.dv8tion.jda.core.hooks.ListenerAdapter
       {
         MessageChannel channel = event.getChannel();
         channel.sendMessage("Shutting down....").queue();
-        Object channels = event.getGuild().getVoiceChannels();
-        for (net.dv8tion.jda.core.entities.VoiceChannel x : (List)channels)
+        List<VoiceChannel> channels = event.getGuild().getVoiceChannels();
+        for (net.dv8tion.jda.core.entities.VoiceChannel x : channels)
         {
           if (!Main.base.contains(x))
           {
