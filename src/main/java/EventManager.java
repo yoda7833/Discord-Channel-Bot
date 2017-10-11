@@ -24,6 +24,7 @@ public class EventManager implements EventListener {
 		{
 			for(ChannelList x: lists)
 			{
+				System.out.println("join for-loop");
 				if(x.contains(((GuildVoiceJoinEvent) event).getChannelJoined()))
 				{
 					if(((GuildVoiceJoinEvent) event).getChannelJoined().getMembers().size()>1)
@@ -35,6 +36,7 @@ public class EventManager implements EventListener {
 							if(current.getChannel().getMembers().size()==0)
 								notEmpty = false;
 							current = current.getNext();
+							System.out.println("in do-while");
 						}while(current!=x.getFirstNode());
 						if(notEmpty)
 						{
@@ -50,7 +52,7 @@ public class EventManager implements EventListener {
 		}
 		else if(event instanceof GuildVoiceMoveEvent)
 		{	
-			//Join section
+			/*//Join section
 			for(ChannelList x: lists)
 			{
 				if(x.contains(((GuildVoiceMoveEvent) event).getChannelJoined()))
@@ -90,7 +92,7 @@ public class EventManager implements EventListener {
 					if(Empty)
 						if(((GuildVoiceMoveEvent) event).getChannelLeft().getMembers().size()==0)
 							x.remove(((GuildVoiceMoveEvent) event).getChannelLeft());
-				}
+				}*/
 		}
 		else if(event instanceof GuildVoiceLeaveEvent)
 		{

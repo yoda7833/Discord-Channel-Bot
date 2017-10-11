@@ -54,9 +54,12 @@ public class ChannelList {
 		else
 		{
 			ChannelNode temp = new ChannelNode(set, first,first.getPrevious());
-			set.getGuild().getController().modifyVoiceChannelPositions().selectPosition(set).moveTo(first.getChannel().getPosition());
+			set.getGuild().getController().modifyVoiceChannelPositions().selectPosition(set).moveTo(first.getChannel().getPosition()).queue();
 			first.getChannel().getManager().setName(first.getChannel().getName()+" 1").queue();
 			ChannelNode current = first.getNext();
+			first.getPrevious().setNext(temp);
+			first.setPrevious(temp);
+			first = temp;
 			int nameNumber =2;
 			while(current!=first)
 			{
@@ -64,9 +67,6 @@ public class ChannelList {
 				nameNumber++;
 				current = current.getNext();
 			}
-			first.getPrevious().setNext(temp);
-			first.setPrevious(temp);
-			first = temp;
 		}
 	}
 	public boolean remove(VoiceChannel search)
