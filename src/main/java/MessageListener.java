@@ -16,20 +16,22 @@ public class MessageListener extends ListenerAdapter
     	Message message = event.getMessage();
         String content = message.getRawContent(); 
         if (event.getAuthor().isBot()) return;
-        // We don't want to respond to other bot accounts, including ourself
-        // getRawContent() is an atomic getter
-        // getContent() is a lazy getter which modifies the content for e.g. console view (strip discord formatting)
-        if (content.equals("!ping"))
+        if(message.isMentioned(event.getJDA().getSelfUser()))//responds when someone mentions the bot
+        {
+        	MessageChannel channel = event.getChannel();
+            channel.sendMessage("You called "+message.getAuthor().getAsMention()+"? Well I can't do much more than respond with this dull message").queue();
+        }
+        if (content.equals("!ping"))//basically to test if the bot works
         {
             MessageChannel channel = event.getChannel();
-            channel.sendMessage("Pong").queue(); // Important to call .queue() on the RestAction returned by sendMessage(...)
+            channel.sendMessage("Pong").queue();
         }
-        else if(content.equals("!pong"))
+        else if(content.equals("!pong"))//to check the ping between the bot and discord server
         {
         	MessageChannel channel = event.getChannel();
             channel.sendMessage("Ping "+event.getJDA().getPing()+"ms").queue();
         }
-        else if(content.startsWith("!afk "))
+        else if(content.startsWith("!afk "))//will move everyone mentioned to the afk channel
         {
         	if(message.getAuthor().getIdLong()==139171653480349697L)
         	if(message.getMember().hasPermission(Permission.ADMINISTRATOR))
@@ -48,39 +50,32 @@ public class MessageListener extends ListenerAdapter
         		event.getChannel().sendMessage("You don't have permission to do that").queue();
         	
         }
-        else if(content.equals("!help"))
+        else if(content.equals("!help"))//reponds with the commands
         {
         	MessageChannel channel = event.getChannel();
             channel.sendMessage("!ping - responds with Pong\n!pong - responds with Ping\n!afk @mentions will move users to the afk channel (admin only)").queue();
         }
-        else if(content.equals("!stop"))
+        else if(content.equals("!stop"))//ends the bot safely
         {
         	if(message.getMember().hasPermission(Permission.ADMINISTRATOR))
         	{
         		MessageChannel channel = event.getChannel();
         		channel.sendMessage("Shutting down....").queue();
+        		Main.eventM.clearAll();
         		System.out.println("Stopped by command");
         		event.getJDA().shutdown();
         	}
         }
-        else if(content.equals("!restart"))
+        else if(content.equals("!restart"))//broken
         {
         	if(message.getMember().hasPermission(Permission.ADMINISTRATOR))
         	{
         		MessageChannel channel = event.getChannel();
-        		channel.sendMessage("Restarting....").queue();
-        		List<VoiceChannel> channels = event.getGuild().getVoiceChannels();
-        		for(VoiceChannel x : channels)
-        		{
-        			if(!Main.base.contains(x))
-        			{
-        				//System.out.println("Here");
-        				x.delete().queue();
-        			}
-        		}
-        		System.out.println("Stopped by command");
-        		event.getJDA().shutdown();
+        		channel.sendMessage("Broken command... please report this issue").queue();
+        		/*Main.eventM.clearAll();
+        		System.out.println("Restarting by Command");
         		new Main();
+        		event.getJDA().shutdown();*/
         	}
         }
         /*else if(content.startsWith("!noTemp"))

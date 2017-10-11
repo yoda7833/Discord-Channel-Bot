@@ -22,28 +22,75 @@ public class EventManager implements EventListener {
 	public void onEvent(Event event) {//does not have a empty channel, and channel they joined has more than 1
 		if(event instanceof GuildVoiceJoinEvent)
 		{
-				for(ChannelList x: lists)
+			for(ChannelList x: lists)
+			{
+				if(x.contains(((GuildVoiceJoinEvent) event).getChannelJoined()))
 				{
-					ChannelNode current = x.getFirstNode();
-					boolean notEmpty = true;
-					do
+					if(((GuildVoiceJoinEvent) event).getChannelJoined().getMembers().size()>1)
 					{
-						if(current.getChannel().getMembers().size()==0)
-							notEmpty = false;
-						current = current.getNext();
-					}while(current!=x.getFirstNode());
-					if(notEmpty)
-						if(x.contains(((GuildVoiceJoinEvent) event).getChannelJoined()))
+						ChannelNode current = x.getFirstNode();
+						boolean notEmpty = true;
+						do
+						{
+							if(current.getChannel().getMembers().size()==0)
+								notEmpty = false;
+							current = current.getNext();
+						}while(current!=x.getFirstNode());
+						if(notEmpty)
 						{
 							x.getFirst().createCopy().complete();
 							//System.out.println(((GuildVoiceJoinEvent) event).getGuild().getVoiceChannels().get(((GuildVoiceJoinEvent) event).getGuild().getVoiceChannels().size()-1).getName());
 							x.add(((GuildVoiceJoinEvent) event).getGuild().getVoiceChannels().get(((GuildVoiceJoinEvent) event).getGuild().getVoiceChannels().size()-1));
 						}
+					}
+						
 				}
+					
+			}
 		}
 		else if(event instanceof GuildVoiceMoveEvent)
 		{	
+			//Join section
+			for(ChannelList x: lists)
+			{
+				if(x.contains(((GuildVoiceMoveEvent) event).getChannelJoined()))
+				{
+					if(((GuildVoiceMoveEvent) event).getChannelJoined().getMembers().size()>1)
+					{
+						ChannelNode current = x.getFirstNode();
+						boolean notEmpty = true;
+						do
+						{
+							if(current.getChannel().getMembers().size()==0)
+								notEmpty = false;
+							current = current.getNext();
+						}while(current!=x.getFirstNode());
+						if(notEmpty)
+						{
+							x.getFirst().createCopy().complete();
+							//System.out.println(((GuildVoiceJoinEvent) event).getGuild().getVoiceChannels().get(((GuildVoiceJoinEvent) event).getGuild().getVoiceChannels().size()-1).getName());
+							x.add(((GuildVoiceMoveEvent) event).getGuild().getVoiceChannels().get(((GuildVoiceMoveEvent) event).getGuild().getVoiceChannels().size()-1));
+						}
+					}	
+				}	
+			}
 			
+			//Leave section
+			boolean Empty = false;
+			for(ChannelList x:lists)
+				if(x.contains(((GuildVoiceMoveEvent) event).getChannelLeft()))
+				{
+					ChannelNode current = x.getFirstNode();
+					Empty = false;
+					while(current!=x.getFirstNode())
+					{
+						if(current.getChannel().getMembers().size()==0&&!current.getChannel().equals(((GuildVoiceMoveEvent) event).getChannelLeft()))
+							Empty = true;
+					}
+					if(Empty)
+						if(((GuildVoiceMoveEvent) event).getChannelLeft().getMembers().size()==0)
+							x.remove(((GuildVoiceMoveEvent) event).getChannelLeft());
+				}
 		}
 		else if(event instanceof GuildVoiceLeaveEvent)
 		{

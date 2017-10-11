@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.JDABuilder;
 public class Main {
 	private static JDA jda;
 	public static ArrayList<Long> base = new ArrayList<Long>();
+	public static EventManager eventM;
 	public static void main(String[] args) {
 		String gender = "Female"; //the bot is a she and you should respect that
 		//test-bot token: MzM4NTg1MDc3Mzk3MTkyNzA0.DFXjgQ.i5jyKTdpTeQ6AS8ssDuVCr3gqxE
@@ -26,7 +27,8 @@ public class Main {
 			//test Grounds id: 338602402557067264L
 			//hivemind     id: 329171118063747072L
 			Guild hivemind =jda.getGuildById(338602402557067264L);
-			jda.addEventListener(new EventManager(hivemind));
+			eventM = new EventManager(hivemind);
+			jda.addEventListener(eventM);
 			jda.getPresence().setGame(Game.of("!help"));
 			base.add(329176499871809537L);//Lobby
 			base.add(329178290562531328L);//afk
