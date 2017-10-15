@@ -20,15 +20,15 @@ public class Main
 
     try
     {
-      jda = new JDABuilder(net.dv8tion.jda.core.AccountType.BOT).addEventListener(new EventManager()).addEventListener(new MessageListener()).setToken("MzM4OTQyNzk2NTIwMDk1NzQ0.DFcwng.Ep83M3dNW-8BqsW6140KwbsBeNA").buildBlocking();
+      jda = new JDABuilder(net.dv8tion.jda.core.AccountType.BOT).addEventListener(new Object[] { new EventManager() }).addEventListener(new Object[] { new MessageListener() }).setToken("MzM4OTQyNzk2NTIwMDk1NzQ0.DFcwng.Ep83M3dNW-8BqsW6140KwbsBeNA").buildBlocking();
       jda.setAutoReconnect(true);
       Guild hivemind = (Guild)jda.getGuilds().get(1);
       jda.getPresence().setGame(net.dv8tion.jda.core.entities.Game.of("!help"));
       base = hivemind.getVoiceChannels();
-      nonTemp.add(hivemind.getVoiceChannelById(329178290583764992L));//mods
-      nonTemp.add(hivemind.getVoiceChannelById(329178290562531328L));//AFK
-      nonTemp.add(hivemind.getVoiceChannelById(364546837102723072L));//ULol
-      nonTemp.add(hivemind.getVoiceChannelById(364546414535114755L));//lobby
+      nonTemp.add((VoiceChannel)hivemind.getVoiceChannelsByName("Lobby", true).get(0));
+      nonTemp.add((VoiceChannel)hivemind.getVoiceChannelsByName("AFK", true).get(0));
+      nonTemp.add((VoiceChannel)hivemind.getVoiceChannelsByName("Mods", true).get(0));
+      nonTemp.add((VoiceChannel)hivemind.getVoiceChannelsByName("Coaches", true).get(0));
     }
     catch (javax.security.auth.login.LoginException e) {
       e.printStackTrace();

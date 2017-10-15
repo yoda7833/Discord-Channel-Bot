@@ -22,7 +22,7 @@ public class EventManager implements net.dv8tion.jda.core.hooks.EventListener
       
       if ((voice.getChannelJoined().getMembers().size() > 1) && (Main.base.contains(voice.getChannelJoined())) && (!Main.nonTemp.contains(voice.getChannelJoined())))
       {
-        if ((Main.base.contains(voice.getChannelJoined())) && (channelsTemp[Main.base.indexOf(voice.getChannelJoined())] == false))
+        if ((Main.base.contains(voice.getChannelJoined())) && (channelsTemp[Main.base.indexOf(voice.getChannelJoined())] == 0))
         {
           channelsTemp[Main.base.indexOf(voice.getChannelJoined())] = true;
           voice.getGuild().getController().createCopyOfChannel(voice.getChannelJoined()).setName(voice.getChannelJoined().getName() + " TEMP").complete();
@@ -44,7 +44,7 @@ public class EventManager implements net.dv8tion.jda.core.hooks.EventListener
       }
       
       GuildVoiceMoveEvent voice = (GuildVoiceMoveEvent)event;
-      if ((((GuildVoiceMoveEvent)event).getChannelLeft().getMembers().isEmpty()) && (channelsTemp[Main.base.indexOf(((GuildVoiceMoveEvent)event).getChannelLeft())] != false))
+      if ((((GuildVoiceMoveEvent)event).getChannelLeft().getMembers().isEmpty()) && (channelsTemp[Main.base.indexOf(((GuildVoiceMoveEvent)event).getChannelLeft())] != 0))
       {
         if (((VoiceChannel)voice.getGuild().getVoiceChannelsByName(voice.getChannelLeft().getName() + " TEMP", false).get(0)).getMembers().isEmpty())
         {
@@ -57,7 +57,7 @@ public class EventManager implements net.dv8tion.jda.core.hooks.EventListener
       
       if ((voice.getChannelJoined().getMembers().size() > 1) && (Main.base.contains(voice.getChannelJoined())) && (!Main.nonTemp.contains(voice.getChannelJoined())))
       {
-        if ((Main.base.contains(voice.getChannelJoined())) && (channelsTemp[Main.base.indexOf(voice.getChannelJoined())] == false))
+        if ((Main.base.contains(voice.getChannelJoined())) && (channelsTemp[Main.base.indexOf(voice.getChannelJoined())] == 0))
         {
           channelsTemp[Main.base.indexOf(voice.getChannelJoined())] = true;
           voice.getGuild().getController().createCopyOfChannel(voice.getChannelJoined()).setName(voice.getChannelJoined().getName() + " TEMP").complete();
@@ -78,7 +78,7 @@ public class EventManager implements net.dv8tion.jda.core.hooks.EventListener
         channelsTemp = new boolean[Main.base.size()];
       }
       GuildVoiceLeaveEvent voice = (GuildVoiceLeaveEvent)event;
-      if ((((GuildVoiceLeaveEvent)event).getChannelLeft().getMembers().isEmpty()) && (channelsTemp[Main.base.indexOf(((GuildVoiceLeaveEvent)event).getChannelLeft())] != false))
+      if ((((GuildVoiceLeaveEvent)event).getChannelLeft().getMembers().isEmpty()) && (channelsTemp[Main.base.indexOf(((GuildVoiceLeaveEvent)event).getChannelLeft())] != 0))
       {
         if (((VoiceChannel)voice.getGuild().getVoiceChannelsByName(voice.getChannelLeft().getName() + " TEMP", false).get(0)).getMembers().isEmpty())
         {
